@@ -24,7 +24,7 @@ export class ShopComponent implements OnInit {
   totalCount: number
 
   //to access the input search text
-  @ViewChild('search', {static: true}) searchTerm: ElementRef
+  @ViewChild('search', {static: false}) searchTerm: ElementRef
 
   constructor(private shopService: ShopService) { }
 
