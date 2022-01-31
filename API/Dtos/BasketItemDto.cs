@@ -15,7 +15,7 @@ namespace API.Dtos
         public decimal Price { get; set; }
 
         [Required]
-        [Range(1, double.MaxValue, ErrorMessage = "Quantity must be at least 1")]
+        [Range(1, double.MaxValue, ErrorMessage = "Quantity must be atleast 1")]
         public int Quantity { get; set; }
 
         [Required]

@@ -18,6 +18,7 @@ export class ShopService {
   getProducts(shopParams: ShopParams){
     let params = new HttpParams()
 
+    //shopParams.brandId !== 0 V1000:40
     if(shopParams.brandId !== 0){
       params = params.append('brandId', shopParams.brandId.toString())
     }
@@ -30,7 +31,7 @@ export class ShopService {
       params = params.append('search', shopParams.search)
     }
 
-    // initially we are sorting by name
+    // initially we are sorting by name V100 1:00
     params = params.append('sort', shopParams.sort)
     params = params.append('pageIndex', shopParams.pageNumber.toString())
     params = params.append('pageSize', shopParams.pageSize.toString())

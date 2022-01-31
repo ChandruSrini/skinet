@@ -22,6 +22,7 @@ namespace API.Controllers
         private readonly IGenericRepository<Product> _productsRepo;
         private readonly IGenericRepository<ProductBrand> _productBrandsRepo;
         private readonly IGenericRepository<ProductType> _productTypesRepo;
+        //IMapper is interface for automapper
         private readonly IMapper _mapper;
 
         public ProductsController(IGenericRepository<Product> productsRepo, 
@@ -37,6 +38,7 @@ namespace API.Controllers
 
         [HttpGet]
         //fromquery attribute is important to infrom controller to look for query params from class
+        //Pagination class inturn has IReadOnlyList<T> of type ProductToReturnDto data
         public async Task<ActionResult<Pagination<ProductToReturnDto>>> GetProducts(
             [FromQuery]ProductSpecParams productParams)
         {

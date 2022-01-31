@@ -21,7 +21,6 @@ namespace API.Extensions
             builder = new IdentityBuilder(builder.UserType, builder.Services);
             builder.AddEntityFrameworkStores<AppIdentityDbContext>();
             builder.AddSignInManager<SignInManager<AppUser>>();
-
             
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -29,7 +28,7 @@ namespace API.Extensions
                 {
                     options.TokenValidationParameters = new TokenValidationParameters
                     {
-                        //setting to false anonymous
+                        //setting to false means anonymous auth
                         ValidateIssuerSigningKey = true,
                         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["Token:Key"])),
                         ValidIssuer = config["Token:Issuer"],

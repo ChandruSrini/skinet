@@ -8,9 +8,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Data
 {
-    public class StoreContext: DbContext
+    public class StoreContext : DbContext
     {
-        public StoreContext(DbContextOptions<StoreContext> options): base(options)
+        public StoreContext(DbContextOptions<StoreContext> options) : base(options)
         {
         }
         public DbSet<Product> Products { get; set; }
@@ -18,12 +18,13 @@ namespace Infrastructure.Data
         public DbSet<ProductType> ProductTypes { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {   
+        {
             // to make use of fluent API that is in Config folder
             base.OnModelCreating(modelBuilder);
+            //takes the Config folder -> ProductConfiguration cs
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 
-             if (Database.ProviderName == "Microsoft.EntityFrameworkCore.Sqlite")
+            if (Database.ProviderName == "Microsoft.EntityFrameworkCore.Sqlite")
             {
                 foreach (var entityType in modelBuilder.Model.GetEntityTypes())
                 {

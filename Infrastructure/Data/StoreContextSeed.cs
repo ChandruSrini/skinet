@@ -49,7 +49,7 @@ namespace Infrastructure.Data
             {
                 var logger = loggerFactory.CreateLogger<StoreContextSeed>();
                 logger.LogError(ex, "An error ocurred during seeding data");
-                
+
             }
         }
     }

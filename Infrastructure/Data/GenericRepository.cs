@@ -23,6 +23,7 @@ namespace Infrastructure.Data
         }
         public async Task<IReadOnlyList<T>> ListAllAsync()
         {
+            //at compile time changes to _context.Products.ToListAysnc()
             return await _context.Set<T>().ToListAsync();
         }
 
@@ -39,6 +40,7 @@ namespace Infrastructure.Data
 
         private IQueryable<T> ApplySpecification(ISpecification<T> spec)
         {
+            //                                                 Product as Queryable
             return SpecificationEvaluator<T>.GetQuery(_context.Set<T>().AsQueryable(), spec);
         }
 

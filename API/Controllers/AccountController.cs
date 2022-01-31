@@ -39,7 +39,6 @@ namespace API.Controllers
         {
             // returns first instance of claim
             // var email = User.FindFirstValue(ClaimTypes.Email);
-
             // var user = await _userManager.FindByEmailAsync(email);
             var user = await _userManager.FindByEmailFromClaimsPrinciple(HttpContext.User);
 
@@ -55,7 +54,7 @@ namespace API.Controllers
         [HttpGet("emailexists")]
         public async Task<ActionResult<bool>> CheckEmailExistsAsync([FromQuery] string email)
         {
-            //returns true if not null
+            //returns true if not null, email exists
             return await _userManager.FindByEmailAsync(email) != null;
         }
 
@@ -77,7 +76,7 @@ namespace API.Controllers
 
             var result = await _userManager.UpdateAsync(user);
 
-            if (result.Succeeded) return Ok(_mapper.Map<AddressDto>(user.Address));
+            if (result.Succeeded) return Ok(_mapper.Map<Address, AddressDto>(user.Address));
 
             return BadRequest("Problem updating the user");
         }
@@ -87,7 +86,7 @@ namespace API.Controllers
         {
             var user = await _userManager.FindByEmailAsync(loginDto.Email);
 
-            // apiresponse check it
+            // apiresponse -- not authorized
             if (user == null) return Unauthorized(new ApiResponse(401));
 
             var result = await _signInManager.CheckPasswordSignInAsync(user, loginDto.Password, false);

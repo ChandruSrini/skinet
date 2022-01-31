@@ -7,8 +7,11 @@ using Core.Specifications;
 
 namespace Core.Interface
 {
+
+    //to be used by classes that is is derived from BaseEntity
     public interface IGenericRepository<T> where T: BaseEntity
     {
+        //Task<Product> GetByIdAsync(int id);
         Task<T> GetByIdAsync(int id);
         Task<IReadOnlyList<T>> ListAllAsync();
         Task<T> GetEntityWithSpec(ISpecification<T> spec);

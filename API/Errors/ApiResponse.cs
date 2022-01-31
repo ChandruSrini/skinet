@@ -24,6 +24,7 @@ namespace API.Errors
                 401 => "Authorized, you are not",
                 404 => "Resource found, it was not",
                 500 => "Server side error. Please check",
+                //default case
                 _ => null
             };
         }

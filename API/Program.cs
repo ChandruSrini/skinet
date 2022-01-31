@@ -17,10 +17,15 @@ namespace API
                 var loggerFactory = services.GetRequiredService<ILoggerFactory>();
                 try
                 {
+                    //-- starting migrations at startup itself
                      var context = services.GetRequiredService<StoreContext>();
                      await context.Database.MigrateAsync();
+                     //--
+                     //++ data seeding
                      await StoreContextSeed.SeedAsync(context, loggerFactory);
+                     //++
 
+                    //appidentitydbcontext 
                      var userManager = services.GetRequiredService<UserManager<AppUser>>();
                      var identityContext = services.GetRequiredService<AppIdentityDbContext>();
                      await identityContext.Database.MigrateAsync();

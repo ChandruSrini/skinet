@@ -50,6 +50,7 @@ namespace API
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             app.UseMiddleware<ExceptionMiddleware>();
+            app.UseSwaggerDoc();
 
             if (env.IsDevelopment())
             {
@@ -58,6 +59,7 @@ namespace API
                app.UseSwaggerDoc();
             }
 
+            //whenever request does not match with API endpoint-> goes to ErrorController
             app.UseStatusCodePagesWithReExecute("/errors/{0}");
 
             app.UseHttpsRedirection();

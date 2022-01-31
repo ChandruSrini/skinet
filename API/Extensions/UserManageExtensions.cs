@@ -20,6 +20,7 @@ namespace API.Extensions
 
         public static async Task<AppUser> FindByEmailFromClaimsPrinciple(this UserManager<AppUser> input, ClaimsPrincipal user)
         {
+            //getting the email from claimtypes --refer TokenService.cs
             var email = user.FindFirstValue(ClaimTypes.Email);
 
             return await input.Users.SingleOrDefaultAsync(x => x.Email == email);

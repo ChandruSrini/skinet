@@ -39,6 +39,7 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   loadProduct(){
+    // + casting to integer
     this.shopService.getProduct(+this.activateRoute.snapshot.paramMap.get('id')).subscribe(product =>{
       this.product = product
       this.bcService.set('@productDetails', product.name)

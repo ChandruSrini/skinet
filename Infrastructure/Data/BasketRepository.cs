@@ -11,6 +11,7 @@ namespace Infrastructure.Data
 {
     public class BasketRepository : IBasketRepository
     {
+        //redis db
         private readonly IDatabase _database;
         public BasketRepository(IConnectionMultiplexer redis)
         {

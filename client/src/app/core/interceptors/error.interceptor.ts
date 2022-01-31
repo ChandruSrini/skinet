@@ -15,6 +15,8 @@ export class ErrorInterceptor implements HttpInterceptor {
 
   constructor(private router: Router, private toastr: ToastrService) {}
 
+  //intercept the http "request" and is the outgoing request
+  //next is http response coming back
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
 
     return next.handle(request).pipe(

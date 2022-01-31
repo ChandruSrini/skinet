@@ -14,6 +14,7 @@ namespace API.Controllers
     {
         public IActionResult Error(int code)
         {
+            //app.UseStatusCodePagesWithReExecute("/errors/{0}"); in startup
             return new ObjectResult(new ApiResponse(code));
         }
     }

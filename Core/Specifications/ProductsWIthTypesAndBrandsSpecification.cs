@@ -9,6 +9,7 @@ namespace Core.Specifications
 {
     public class ProductsWIthTypesAndBrandsSpecification: BaseSpecification<Product>
     {
+        //calling the BaseSpecification parameterized constructor to add criterias
         public ProductsWIthTypesAndBrandsSpecification(ProductSpecParams productParams) : base(x => 
             (string.IsNullOrEmpty(productParams.Search) || x.Name.ToLower().Contains(productParams.Search)) &&
             (!productParams.BrandId.HasValue || x.ProductBrandId == productParams.BrandId) &&
@@ -17,7 +18,9 @@ namespace Core.Specifications
         {
             AddInclude(x => x.ProductType);
             AddInclude(x => x.ProductBrand);
+            //returns product in ASC order
             AddOrderBy(x => x.Name);
+            //logic
             ApplyPaging(productParams.PageSize * (productParams.PageIndex - 1), productParams.PageSize);
 
             if(!string.IsNullOrEmpty(productParams.Sort))
@@ -37,6 +40,7 @@ namespace Core.Specifications
             }
         }
 
+        ///                                                     BaseSpecification(Expression<Func<T, bool>> criteria)
         public ProductsWIthTypesAndBrandsSpecification(int id) : base(x => x.Id == id)
         {
             AddInclude(x => x.ProductType);

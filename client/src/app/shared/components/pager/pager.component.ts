@@ -9,7 +9,7 @@ export class PagerComponent implements OnInit {
 
   @Input() totalCount: number;
   @Input() pageSize: number;
-  //output property cause emitting a event out a component of type number
+  //output property cause emitting a event out a component (to shop) of type number
   @Output() pageChanged = new EventEmitter<number>()
 
   constructor() { }
@@ -18,6 +18,7 @@ export class PagerComponent implements OnInit {
   }
 
   onPagerChange(event: any){
+    //emitting the page number
     this.pageChanged.emit(event.page)
   }
 

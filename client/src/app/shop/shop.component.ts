@@ -23,7 +23,8 @@ export class ShopComponent implements OnInit {
   ]
   totalCount: number
 
-  //to access the input search text
+  //to access the input search text #search placeholder="Search"
+  //V132 due to loading spinner
   @ViewChild('search', {static: false}) searchTerm: ElementRef
 
   constructor(private shopService: ShopService) { }
@@ -47,6 +48,7 @@ export class ShopComponent implements OnInit {
 
   getBrands(){
     this.shopService.getBrands().subscribe(response =>{
+      //initial value set 0 and 'ALL' along with other Brands using ...response
       this.brands = [{id:0, name: 'All'}, ...response]
     }, error =>{
       console.log(error)
@@ -63,7 +65,7 @@ export class ShopComponent implements OnInit {
 
   onBrandSelected(brandId: number){
     this.shopParams.brandId = brandId
-    //an error will occur moving from page 2 to 1 beacuse of filter applied. to tackle it.
+    //an error will occur moving from page 2 to 1 beacuse of filter applied. to tackle it. V105
     this.shopParams.pageNumber = 1
     this.getProducts()
   }
@@ -82,7 +84,9 @@ export class ShopComponent implements OnInit {
 
   onPageChanged(event: any){
     // call the (pagechanged) property only if page number is changed from say 1 to 2   v105
-    if(this.shopParams.pageNumber != event){
+    //page changed is received from child component (pager) V103
+    // the "event" here is the pagenumber itself V103: 9:00
+    if(this.shopParams.pageNumber !== event){
       this.shopParams.pageNumber = event
       this.getProducts()
     }
@@ -97,6 +101,7 @@ export class ShopComponent implements OnInit {
 
   onReset(){
     this.searchTerm.nativeElement.value = ''
+    // initialize all values to default values
     this.shopParams = new ShopParams()
     this.getProducts()
   }
